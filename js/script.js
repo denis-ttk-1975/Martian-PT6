@@ -15,13 +15,13 @@
 'use strict';
 
 const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
+  movies: [
+    'Логан',
+    'Лига справедливости',
+    'Ла-ла лэнд',
+    'Одержимость',
+    'Скотт Пилигрим против...',
+  ],
 };
 
 const adv = document.querySelector('.promo__adv');
@@ -32,13 +32,24 @@ const advElem = adv.querySelectorAll('img');
 
 // console.log(advElem);
 
+// const advElemHTML = adv.getElementsByTagName('img');
+
+// console.log(advElemHTML);
+
 const genre = document.querySelector('.promo__genre');
 
 // console.log(genre);
 
-for (let i=0; i < advElem.length; i++) {
-	advElem[i].remove();
+const promo_bg = document.querySelector('.promo__bg');
+
+console.log(promo_bg);
+
+for (let i = 0; i < advElem.length; i++) {
+  advElem[i].remove();
 }
 
 genre.textContent = 'Драма';
 
+promo_bg.style.backgroundImage = '';
+
+promo_bg.style.backgroundImage = 'url(/img/bg.jpg)';
