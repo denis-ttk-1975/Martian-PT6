@@ -42,7 +42,13 @@ const genre = document.querySelector('.promo__genre');
 
 const promo_bg = document.querySelector('.promo__bg');
 
-console.log(promo_bg);
+// console.log(promo_bg);
+
+const promo_list = document.querySelectorAll('.promo__interactive-item');
+
+const movieDBsorted = movieDB.movies.sort();
+
+// console.log(movieDBsorted);
 
 for (let i = 0; i < advElem.length; i++) {
   advElem[i].remove();
@@ -50,6 +56,6 @@ for (let i = 0; i < advElem.length; i++) {
 
 genre.textContent = 'Драма';
 
-promo_bg.style.backgroundImage = '';
+promo_bg.style.backgroundImage = 'url(../img/bg.jpg)';
 
-promo_bg.style.backgroundImage = 'url(/img/bg.jpg)';
+promo_list.forEach((item, key) => (item.textContent = movieDBsorted[key]));
