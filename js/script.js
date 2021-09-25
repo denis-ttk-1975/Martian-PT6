@@ -50,6 +50,10 @@ const movieDBsorted = movieDB.movies.sort();
 
 // console.log(movieDBsorted);
 
+const ul = document.querySelectorAll('ul.promo__interactive-list');
+
+console.log(ul);
+
 for (let i = 0; i < advElem.length; i++) {
   advElem[i].remove();
 }
@@ -58,4 +62,6 @@ genre.textContent = 'Драма';
 
 promo_bg.style.backgroundImage = 'url(../img/bg.jpg)';
 
-promo_list.forEach((item, key) => (item.textContent = movieDBsorted[key]));
+promo_list.forEach(
+  (item, key) => (item.textContent = key + 1 + '. ' + movieDBsorted[key])
+);
