@@ -75,7 +75,7 @@ const ordShortedArr = function (arr) {
   });
   return newArr;
 };
-
+//8th task
 const deleteFunc = function () {
   document.querySelectorAll('.delete').forEach((elem, i) => {
     elem.addEventListener('click', () => {
@@ -127,4 +127,3 @@ const filmAdd = function (nameField) {
     console.log('Добавляем любимый фильм');
   }
 };
-//8th task
