@@ -61,7 +61,7 @@ const genre = document.querySelector('.promo__genre');
 
 const promo_bg = document.querySelector('.promo__bg');
 
-// console.log(promo_bg);
+console.log(promo_bg);
 
 const promo_list = document.querySelectorAll('.promo__interactive-item');
 
@@ -77,11 +77,13 @@ const movieDBsorted = movieDB.movies.sort();
 
 const ul = document.querySelector('ul.promo__interactive-list');
 
-// console.log(ul);
+console.log(ul);
 
 let filmName = document.querySelector('.adding__input');
 let CheckBoxLovedFilm = document.querySelector('[type = "checkbox"]');
 let yesButton = document.querySelector('.yes').nextElementSibling;
+
+let delBasket = document.querySelectorAll('.delete');
 
 for (let i = 0; i < advElem.length; i++) {
   advElem[i].remove();
@@ -92,7 +94,10 @@ genre.textContent = 'Драма';
 promo_bg.style.backgroundImage = 'url("img/bg.jpg")';
 
 promo_list.forEach(
-  (item, key) => (item.textContent = key + 1 + '. ' + movieDBsorted[key])
+  (item, key) =>
+    (item.innerHTML = `${key + 1}. ${
+      movieDBsorted[key]
+    }<div class="delete"></div>`)
 );
 
 const filmAdd = function (nameField) {
@@ -116,13 +121,14 @@ const filmAdd = function (nameField) {
 
     let addedLi = document.createElement('li');
     addedLi.classList.add('promo__interactive-item');
-    addedLi.innerHTML = '<div class="delete"></div>';
+
     console.log(addedLi);
     console.log(CheckBoxLovedFilm.checked);
     ul.append(addedLi);
     const promo_listNew = document.querySelectorAll('.promo__interactive-item');
     promo_listNew.forEach(
-      (item, key) => (item.textContent = shortedMovieList[key])
+      (item, key) =>
+        (item.innerHTML = `${shortedMovieList[key]} <div class="delete"></div>`)
     );
     CheckBoxLovedFilm.checked = false;
     filmName.value = '';
