@@ -42,105 +42,89 @@ const movieDB = {
     'Скотт Пилигрим против...',
   ],
 };
-
+// 1st task
 const adv = document.querySelector('.promo__adv');
-
-// console.log(adv);
-
 const advElem = adv.querySelectorAll('img');
 
-// console.log(advElem);
-
-// const advElemHTML = adv.getElementsByTagName('img');
-
-// console.log(advElemHTML);
-
+for (let i = 0; i < advElem.length; i++) {
+  advElem[i].remove();
+}
+//2d task
 const genre = document.querySelector('.promo__genre');
 
-// console.log(genre);
+genre.textContent = 'Драма';
+//3d task
+const promoBG = document.querySelector('.promo__bg');
 
-const promo_bg = document.querySelector('.promo__bg');
+promoBG.style.backgroundImage = 'url("img/bg.jpg")';
+//4-5th tasks
+const sortArr = function (arr) {
+  arr.sort();
+  arr.forEach((elem) => elem.toUpperCase());
+  return arr;
+};
 
-console.log(promo_bg);
+const ordShortedArr = function (arr) {
+  let newArr = [];
+  newArr = arr.map((item, key) => {
+    if (item.length > 21) {
+      return key + 1 + '. ' + item.substring(0, 17) + '...';
+    } else {
+      return key + 1 + '. ' + item;
+    }
+  });
+  return newArr;
+};
 
-const promo_list = document.querySelectorAll('.promo__interactive-item');
+const deleteFunc = function () {
+  document.querySelectorAll('.delete').forEach((elem, i) => {
+    elem.addEventListener('click', () => {
+      elem.parentElement.remove();
+      movieDB.movies.splice(i, 1);
+      console.log(movieDB.movies);
+      clearUlAddLi(ordShortedArr(sortArr(movieDB.movies)));
+    });
+  });
+};
 
-// console.log(promo_list);
+const clearUlAddLi = function (arr) {
+  const ul = document.querySelector('ul.promo__interactive-list');
+  ul.innerHTML = '';
+  arr.forEach((item) => {
+    let addedLi = document.createElement('li');
+    addedLi.classList.add('promo__interactive-item');
+    addedLi.innerHTML = `${item} <div class="delete"></div>`;
+    ul.append(addedLi);
+  });
+  deleteFunc();
+};
 
-const prList = document.querySelector('.promo__interactive-list');
-
-// console.log(prList);
-
-const movieDBsorted = movieDB.movies.sort();
-
-// console.log(movieDBsorted);
-
-const ul = document.querySelector('ul.promo__interactive-list');
-
-console.log(ul);
+clearUlAddLi(ordShortedArr(sortArr(movieDB.movies)));
+//6-7, 10th task
 
 let filmName = document.querySelector('.adding__input');
 let CheckBoxLovedFilm = document.querySelector('[type = "checkbox"]');
 let yesButton = document.querySelector('.yes').nextElementSibling;
 
-let delBasket = document.querySelectorAll('.delete');
-
-for (let i = 0; i < advElem.length; i++) {
-  advElem[i].remove();
-}
-
-genre.textContent = 'Драма';
-
-promo_bg.style.backgroundImage = 'url("img/bg.jpg")';
-
-promo_list.forEach(
-  (item, key) =>
-    (item.innerHTML = `${key + 1}. ${
-      movieDBsorted[key]
-    }<div class="delete"></div>`)
-);
-
-const filmAdd = function (nameField) {
-  let shortedMovieList = [];
-  if (nameField) {
-    movieDB.movies.push(nameField.toUpperCase());
-    movieDB.movies.sort();
-    shortedMovieList = movieDB.movies.map((item, key) => {
-      if (item.length > 21) {
-        return key + 1 + '. ' + item.substring(0, 17) + '...';
-      } else {
-        return key + 1 + '. ' + item;
-      }
-    });
-
-    console.log(shortedMovieList);
-
-    if (CheckBoxLovedFilm.checked) {
-      console.log('Добавляем любимый фильм');
-    }
-
-    let addedLi = document.createElement('li');
-    addedLi.classList.add('promo__interactive-item');
-
-    console.log(addedLi);
-    console.log(CheckBoxLovedFilm.checked);
-    ul.append(addedLi);
-    const promo_listNew = document.querySelectorAll('.promo__interactive-item');
-    promo_listNew.forEach(
-      (item, key) =>
-        (item.innerHTML = `${shortedMovieList[key]} <div class="delete"></div>`)
-    );
-    CheckBoxLovedFilm.checked = false;
-    filmName.value = '';
-  }
-};
-
 yesButton.addEventListener('click', (e) => {
   e.preventDefault();
-  console.log(filmName);
-  console.log(filmName.value);
-
   filmAdd(filmName.value);
+  filmName.value = '';
+  CheckBoxLovedFilm.checked = false;
 });
 
-// console.log(filmName, CheckBoxLovedFilm, yesButton);
+const filmAdd = function (nameField) {
+  if (nameField && !CheckBoxLovedFilm.checked) {
+    movieDB.movies.push(nameField.toUpperCase());
+    clearUlAddLi(ordShortedArr(sortArr(movieDB.movies)));
+  }
+
+  //9th task
+
+  if (nameField && CheckBoxLovedFilm.checked) {
+    movieDB.movies.push(nameField.toUpperCase());
+    clearUlAddLi(ordShortedArr(sortArr(movieDB.movies)));
+    console.log('Добавляем любимый фильм');
+  }
+};
+//8th task
